@@ -1,0 +1,35 @@
+# Copyright 2022 Canonical Ltd
+# See LICENSE file for licensing details.
+name: etcd-operator
+description: |
+  A distributed, reliable key-value store for the most critical data of a
+  distributed system.
+summary: |
+  An etcd operator.
+
+containers:
+  etcd:
+    resource: etcd-image
+    mounts:
+      - storage: data
+        location: /var/lib/etcd
+
+resources:
+  etcd-image:
+    type: oci-image
+    description: OCI image for etcd (coreos/etcd)
+    upstream-source: quay.io/coreos/etcd:v3.5.4
+
+provides:
+  db:
+    interface: etcd
+
+peers:
+  cluster:
+    interface: etcd-cluster
+
+storage:
+  data:
+    type: filesystem
+    description: Storage used for etcd purposes (data and WAL).
+    minimum-size: 1G

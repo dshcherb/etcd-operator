@@ -1,0 +1,26 @@
+name: {{ name }}
+data-dir: /var/lib/etcd
+
+# List of this member's peer URLs to advertise to the rest of the cluster.
+initial-advertise-peer-urls: {{ peer_urls }}
+listen-peer-urls: {{ listen_peer_url }}
+
+initial-cluster: {{ initial_cluster }}
+
+initial-cluster-token: {{ cluster_token }}
+
+initial-cluster-state: {{ initial_cluster_state }}
+
+listen-client-urls: {{ listen_client_urls }}
+
+peer-transport-security:
+
+  # Enable peer client cert authentication.
+  client-cert-auth: true
+
+  # Peer TLS using generated certificates.
+  auto-tls: true
+
+# 10 years
+self-signed-cert-validity: 10
+
